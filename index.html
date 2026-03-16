@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sunbeam Creative — Brief Submission</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<!-- EmailJS SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<style>
+  :root {
+    --bg: #0e0b0f;
+    --surface: #1a1118;
+    --surface2: #221520;
+    --border: #3a1f30;
+    --accent: #ff2d6b;
+    --accent2: #4b5ffa;
+    --accent3: #c42aad;
+    --text: #fff0f5;
+    --muted: #9e7a8e;
+    --danger: #ff5555;
+    --success: #6bffb8;
+    --radius: 10px;
+    --font-head: 'Syne', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+    --grad: linear-gradient(135deg, #ff2d6b 0%, #c42aad 50%, #4b5ffa 100%);
+    --grad-text: linear-gradient(90deg, #ff2d6b, #c42aad, #4b5ffa);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: var(--font-body); font-size: 15px; line-height: 1.6; min-height: 100vh; }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 40% at 15% 0%, rgba(255,45,107,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 35% at 85% 10%, rgba(75,95,250,0.1) 0%, transparent 55%),
+      radial-gradient(ellipse 40% 30% at 50% 100%, rgba(196,42,173,0.08) 0%, transparent 60%);
+    pointer-events: none; z-index: 0;
+  }
+  body::after {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    background-size: 200px 200px; opacity: 0.35; pointer-events: none; z-index: 0;
+  }
+
+  .page-wrap { position: relative; z-index: 1; max-width: 820px; margin: 0 auto; padding: 60px 24px 100px; }
+
+  .header { margin-bottom: 56px; }
+  .header-label { font-family: var(--font-head); font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+  .header-label::before { content: ''; display: inline-block; width: 28px; height: 2px; background: var(--grad); }
+  .header h1 { font-family: var(--font-head); font-size: clamp(36px, 6vw, 60px); font-weight: 800; line-height: 1.05; letter-spacing: -0.03em; }
+  .header h1 span { background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .header-sub { margin-top: 16px; color: var(--muted); font-size: 15px; max-width: 480px; font-weight: 300; }
+  .header-line { margin-top: 40px; height: 1px; background: var(--grad); opacity: 0.4; }
+
+  .agency-bar { display: flex; align-items: center; gap: 14px; margin-bottom: 44px; }
+  .agency-logo { width: 52px; height: 52px; flex-shrink: 0; }
+  .agency-name { display: flex; flex-direction: column; line-height: 1.1; }
+  .agency-name .name-main { font-family: var(--font-head); font-size: 22px; font-weight: 700; letter-spacing: -0.02em; color: #fff; }
+  .agency-name .name-sub { font-family: var(--font-body); font-size: 12px; font-weight: 300; letter-spacing: 0.12em; text-transform: uppercase; background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+  .section { margin-bottom: 48px; animation: fadeUp 0.5s ease both; }
+  .section:nth-child(1){animation-delay:.05s}.section:nth-child(2){animation-delay:.1s}.section:nth-child(3){animation-delay:.15s}.section:nth-child(4){animation-delay:.2s}.section:nth-child(5){animation-delay:.25s}.section:nth-child(6){animation-delay:.3s}.section:nth-child(7){animation-delay:.35s}
+
+  .section-title { font-family: var(--font-head); font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+  .section-num { width: 24px; height: 24px; border-radius: 50%; background: rgba(255,45,107,0.15); border: 1px solid rgba(255,45,107,0.3); display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; color: var(--accent); flex-shrink: 0; }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+  @media(max-width:600px){.grid-2,.grid-3{grid-template-columns:1fr}}
+
+  .field { display: flex; flex-direction: column; gap: 6px; }
+  .field.full { grid-column: 1 / -1; }
+  label { font-size: 12px; font-weight: 500; letter-spacing: 0.05em; color: var(--muted); text-transform: uppercase; }
+  label .req { color: var(--accent); margin-left: 2px; }
+
+  input[type="text"],input[type="email"],input[type="url"],input[type="date"],input[type="number"],select,textarea {
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+    color: var(--text); font-family: var(--font-body); font-size: 14px; padding: 12px 16px;
+    outline: none; width: 100%; transition: border-color 0.2s, background 0.2s; -webkit-appearance: none;
+  }
+  input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(0.6); cursor: pointer; }
+  input:focus,select:focus,textarea:focus { border-color: var(--accent); background: var(--surface2); }
+  input::placeholder,textarea::placeholder { color: var(--muted); opacity: 0.5; }
+  select option { background: var(--surface2); }
+  textarea { resize: vertical; min-height: 100px; }
+
+  .check-group { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; }
+  .check-item { display: flex; align-items: center; gap: 8px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 8px 14px; cursor: pointer; transition: all 0.15s; user-select: none; }
+  .check-item:has(input:checked) { border-color: var(--accent); background: rgba(255,45,107,0.1); }
+  .check-item input[type="checkbox"] { width: 14px; height: 14px; accent-color: var(--accent); cursor: pointer; flex-shrink: 0; }
+  .check-item span { font-size: 13px; color: var(--text); }
+
+  .file-drop { border: 2px dashed var(--border); border-radius: var(--radius); padding: 28px; text-align: center; cursor: pointer; transition: all 0.2s; background: var(--surface); position: relative; }
+  .file-drop:hover,.file-drop.drag-over { border-color: var(--accent); background: rgba(255,45,107,0.05); }
+  .file-drop input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
+  .file-icon { font-size: 28px; margin-bottom: 8px; }
+  .file-drop-text { font-size: 13px; color: var(--muted); }
+  .file-drop-text strong { color: var(--accent); font-weight: 500; }
+  .file-list { margin-top: 12px; display: flex; flex-direction: column; gap: 6px; }
+  .file-tag { display: flex; align-items: center; justify-content: space-between; background: rgba(255,45,107,0.08); border: 1px solid rgba(255,45,107,0.2); border-radius: 6px; padding: 7px 12px; font-size: 12px; }
+  .file-tag-name { color: var(--accent); }
+  .file-tag-size { color: var(--muted); margin-left: 10px; }
+  .file-remove { background: none; border: none; color: var(--muted); cursor: pointer; font-size: 16px; line-height: 1; padding: 0; transition: color 0.15s; }
+  .file-remove:hover { color: var(--danger); }
+
+  .due-date-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; display: flex; align-items: center; gap: 16px; }
+  .due-date-icon { font-size: 28px; flex-shrink: 0; }
+  .due-date-wrap .field { flex: 1; gap: 4px; }
+
+  .divider { height: 1px; background: var(--border); margin: 40px 0; }
+  .hint { font-size: 11px; color: var(--muted); margin-top: 2px; font-style: italic; }
+
+  .submit-zone { margin-top: 48px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+  .btn-submit { font-family: var(--font-head); font-weight: 700; font-size: 14px; letter-spacing: 0.1em; text-transform: uppercase; background: var(--grad); color: #fff; border: none; border-radius: var(--radius); padding: 16px 40px; cursor: pointer; transition: all 0.2s; position: relative; overflow: hidden; min-width: 200px; }
+  .btn-submit:hover { opacity: 0.9; transform: translateY(-1px); box-shadow: 0 8px 28px rgba(255,45,107,0.35); }
+  .btn-submit:active { transform: translateY(0); }
+  .btn-submit:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+  .submit-note { font-size: 12px; color: var(--muted); font-style: italic; }
+
+  /* Progress bar inside button */
+  .btn-progress { position: absolute; left: 0; top: 0; height: 100%; background: rgba(255,255,255,0.15); width: 0; transition: width 0.4s ease; }
+
+  .toast { position: fixed; bottom: 32px; right: 32px; background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 24px; max-width: 360px; z-index: 1000; transform: translateY(80px); opacity: 0; transition: all 0.35s cubic-bezier(0.34,1.56,0.64,1); display: flex; align-items: flex-start; gap: 12px; }
+  .toast.show { transform: translateY(0); opacity: 1; }
+  .toast.success { border-color: rgba(107,255,184,0.4); }
+  .toast.error { border-color: rgba(255,85,85,0.4); }
+  .toast-icon { font-size: 20px; flex-shrink: 0; line-height: 1.4; }
+  .toast-title { font-family: var(--font-head); font-weight: 700; font-size: 14px; margin-bottom: 2px; }
+  .toast-msg { font-size: 12px; color: var(--muted); }
+  .toast.success .toast-title { color: var(--success); }
+  .toast.error .toast-title { color: var(--danger); }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .spinner { width: 16px; height: 16px; border: 2px solid rgba(255,255,255,0.3); border-top-color: #fff; border-radius: 50%; animation: spin 0.7s linear infinite; display: inline-block; vertical-align: middle; margin-right: 8px; }
+
+  .field-error { font-size: 11px; color: var(--danger); margin-top: 3px; display: none; }
+  .field.has-error input,.field.has-error select,.field.has-error textarea { border-color: var(--danger); }
+  .field.has-error .field-error { display: block; }
+
+  @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
+  /* Setup banner */
+  .setup-banner { background: rgba(255,45,107,0.08); border: 1px solid rgba(255,45,107,0.25); border-radius: var(--radius); padding: 16px 20px; margin-bottom: 32px; font-size: 13px; color: var(--muted); display: none; }
+  .setup-banner.show { display: block; }
+  .setup-banner strong { color: var(--accent); }
+  .setup-banner code { background: rgba(255,255,255,0.08); padding: 2px 6px; border-radius: 4px; font-size: 12px; color: var(--text); }
+</style>
+</head>
+<body>
+
+<div class="page-wrap">
+
+  <div class="header">
+    <div class="agency-bar">
+      <svg class="agency-logo" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="sunGrad" x1="50" y1="0" x2="50" y2="100" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#ff2d6b"/><stop offset="50%" stop-color="#c42aad"/><stop offset="100%" stop-color="#4b5ffa"/>
+          </linearGradient>
+          <clipPath id="topHalf"><rect x="0" y="0" width="100" height="51"/></clipPath>
+        </defs>
+        <ellipse cx="50" cy="51" rx="28" ry="28" fill="url(#sunGrad)" clip-path="url(#topHalf)"/>
+        <ellipse cx="50" cy="51" rx="40" ry="5" fill="url(#sunGrad)" opacity="0.9"/>
+        <ellipse cx="50" cy="60" rx="32" ry="4"  fill="url(#sunGrad)" opacity="0.75"/>
+        <ellipse cx="50" cy="68" rx="24" ry="3.2" fill="url(#sunGrad)" opacity="0.6"/>
+        <ellipse cx="50" cy="75" rx="17" ry="2.5" fill="url(#sunGrad)" opacity="0.5"/>
+        <ellipse cx="50" cy="81" rx="11" ry="2"   fill="url(#sunGrad)" opacity="0.4"/>
+        <ellipse cx="50" cy="86" rx="7"  ry="1.5" fill="url(#sunGrad)" opacity="0.3"/>
+      </svg>
+      <div class="agency-name">
+        <span class="name-main">sunbeam</span>
+        <span class="name-sub">creative</span>
+      </div>
+    </div>
+    <div class="header-label">New Project Intake</div>
+    <h1>Creative<br><span>Brief Form</span></h1>
+    <p class="header-sub">Fill in as much detail as possible. The more context you give the team, the stronger the creative output.</p>
+    <div class="header-line"></div>
+  </div>
+
+  <!-- Setup reminder (shown only if keys not configured) -->
+  <div class="setup-banner" id="setupBanner">
+    ⚙️ <strong>Dev setup needed:</strong> Replace <code>YOUR_EMAILJS_PUBLIC_KEY</code>, <code>YOUR_SERVICE_ID</code>, and <code>YOUR_TEMPLATE_ID</code> in the script below with your EmailJS credentials.
+  </div>
+
+  <form id="briefForm" novalidate>
+
+    <!-- 01 -->
+    <div class="section">
+      <div class="section-title"><span class="section-num">01</span> Client & Project</div>
+      <div class="grid-2">
+        <div class="field" id="field-company"><label>Company / Brand Name <span class="req">*</span></label><input type="text" name="company" placeholder="e.g. Force of Nature" required><div class="field-error">This field is required.</div></div>
+        <div class="field" id="field-project"><label>Project Name <span class="req">*</span></label><input type="text" name="project" placeholder="e.g. Summer Launch Campaign" required><div class="field-error">This field is required.</div></div>
+        <div class="field" id="field-contact_name"><label>Contact Name <span class="req">*</span></label><input type="text" name="contact_name" placeholder="Full name" required><div class="field-error">This field is required.</div></div>
+        <div class="field" id="field-contact_email"><label>Contact Email <span class="req">*</span></label><input type="email" name="contact_email" placeholder="name@company.com" required><div class="field-error">Please enter a valid email.</div></div>
+        <div class="field full" id="field-background"><label>Company / Brand Background <span class="req">*</span></label><textarea name="background" placeholder="What does this company do? What's their market position, history, and key differentiators?" rows="4" required></textarea><div class="field-error">This field is required.</div></div>
+      </div>
+    </div>
+
+    <!-- 02 -->
+    <div class="section">
+      <div class="section-title"><span class="section-num">02</span> Why Are We Advertising?</div>
+      <div class="grid-2">
+        <div class="field full" id="field-objective"><label>Campaign Objective <span class="req">*</span></label><textarea name="objective" placeholder="What do we want to achieve?" rows="3" required></textarea><div class="field-error">This field is required.</div></div>
+        <div class="field full">
+          <label>Campaign Type</label>
+          <div class="check-group">
+            <label class="check-item"><input type="checkbox" name="campaign_type" value="Brand Awareness"><span>Brand Awareness</span></label>
+            <label class="check-item"><input type="checkbox" name="campaign_type" value="Product Launch"><span>Product Launch</span></label>
+            <label class="check-item"><input type="checkbox" name="campaign_type" value="Promotion / Offer"><span>Promotion / Offer</span></label>
+            <label class="check-item"><input type="checkbox" name="campaign_type" value="Lead Generation"><span>Lead Generation</span></label>
+            <label class="check-item"><input type="checkbox" name="campaign_type" value="Retention / Loyalty"><span>Retention / Loyalty</span></label>
+            <label class="check-item"><input type="checkbox" name="campaign_type" value="Event"><span>Event</span></label>
+            <label class="check-item"><input type="checkbox" name="campaign_type" value="Rebranding"><span>Rebranding</span></label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 03 -->
+    <div class="section">
+      <div class="section-title"><span class="section-num">03</span> Target Audience</div>
+      <div class="grid-2">
+        <div class="field" id="field-audience_primary"><label>Primary Audience <span class="req">*</span></label><textarea name="audience_primary" placeholder="Demographics, lifestyle, behaviors" rows="3" required></textarea><div class="field-error">This field is required.</div></div>
+        <div class="field"><label>Secondary Audience</label><textarea name="audience_secondary" placeholder="Any secondary group?" rows="3"></textarea></div>
+        <div class="field"><label>Consumer Insight</label><textarea name="consumer_insight" placeholder="What does the audience think, feel, or believe right now?" rows="3"></textarea></div>
+        <div class="field"><label>Consumer Enemy</label><textarea name="consumer_enemy" placeholder="What's the biggest barrier the audience faces?" rows="3"></textarea></div>
+        <div class="field full"><label>What Do We Want Them to Do?</label><input type="text" name="consumer_action" placeholder="e.g. Try the product, follow on social..."></div>
+      </div>
+    </div>
+
+    <!-- 04 -->
+    <div class="section">
+      <div class="section-title"><span class="section-num">04</span> Message & Brand Voice</div>
+      <div class="grid-2">
+        <div class="field full" id="field-main_message"><label>Main Message / Key Idea <span class="req">*</span></label><input type="text" name="main_message" placeholder="One sentence — the single most important thing to remember" required><div class="field-error">This field is required.</div></div>
+        <div class="field"><label>Support Points</label><textarea name="support_points" placeholder="Facts or reasons that back up the main message" rows="3"></textarea></div>
+        <div class="field"><label>Brand Idea / Positioning</label><textarea name="brand_idea" placeholder="Core brand promise in one sentence" rows="3"></textarea></div>
+        <div class="field" id="field-tone"><label>Tone of Voice <span class="req">*</span></label><input type="text" name="tone" placeholder="e.g. Bright and joyful, Fun and irreverent" required><div class="field-error">This field is required.</div></div>
+        <div class="field"><label>Brand Assets to Use</label><textarea name="brand_assets" placeholder="Logos, taglines, fonts, color palette..." rows="3"></textarea></div>
+        <div class="field"><label>Mandatory Inclusions</label><textarea name="mandatories" placeholder="Legal disclaimers, logos, hashtags, CTAs" rows="3"></textarea></div>
+      </div>
+    </div>
+
+    <!-- 05 -->
+    <div class="section">
+      <div class="section-title"><span class="section-num">05</span> Platforms & Deliverables</div>
+      <div class="grid-2">
+        <div class="field full">
+          <label>Platforms</label>
+          <div class="check-group">
+            <label class="check-item"><input type="checkbox" name="platforms" value="Instagram"><span>Instagram</span></label>
+            <label class="check-item"><input type="checkbox" name="platforms" value="TikTok"><span>TikTok</span></label>
+            <label class="check-item"><input type="checkbox" name="platforms" value="Facebook"><span>Facebook</span></label>
+            <label class="check-item"><input type="checkbox" name="platforms" value="YouTube"><span>YouTube</span></label>
+            <label class="check-item"><input type="checkbox" name="platforms" value="Twitter/X"><span>Twitter / X</span></label>
+            <label class="check-item"><input type="checkbox" name="platforms" value="LinkedIn"><span>LinkedIn</span></label>
+            <label class="check-item"><input type="checkbox" name="platforms" value="TV / OOH"><span>TV / OOH</span></label>
+            <label class="check-item"><input type="checkbox" name="platforms" value="Print"><span>Print</span></label>
+            <label class="check-item"><input type="checkbox" name="platforms" value="Microsite"><span>Microsite</span></label>
+            <label class="check-item"><input type="checkbox" name="platforms" value="In-store"><span>In-store / Event</span></label>
+          </div>
+        </div>
+        <div class="field full"><label>Deliverables Needed</label><textarea name="deliverables" placeholder="e.g. 3 x short-form videos (15s), 5 x static posts..." rows="3"></textarea></div>
+      </div>
+    </div>
+
+    <!-- 06 -->
+    <div class="section">
+      <div class="section-title"><span class="section-num">06</span> Budget & Team</div>
+      <div class="grid-3">
+        <div class="field"><label>Total Budget</label><input type="text" name="budget" placeholder="e.g. THB 500,000"></div>
+        <div class="field"><label>Budget Breakdown</label><input type="text" name="budget_breakdown" placeholder="e.g. 5k each for FB, IG, TikTok"></div>
+        <div class="field"><label>Budget Flexibility</label><select name="budget_flex"><option value="">Select...</option><option>Fixed — no changes</option><option>Slightly flexible (±10%)</option><option>Flexible if justified</option><option>TBD</option></select></div>
+        <div class="field"><label>Client CEO / Decision Maker</label><input type="text" name="stakeholder_ceo" placeholder="Name & role"></div>
+        <div class="field"><label>Day-to-Day Contact</label><input type="text" name="stakeholder_contact" placeholder="Name & role"></div>
+        <div class="field"><label>Internal Team (assigned)</label><input type="text" name="stakeholder_internal" placeholder="e.g. Jenny L. — Social"></div>
+      </div>
+    </div>
+
+    <!-- 07 -->
+    <div class="section">
+      <div class="section-title"><span class="section-num">07</span> Timeline & Deadline</div>
+      <div class="due-date-wrap" style="margin-bottom:16px">
+        <div class="due-date-icon">📅</div>
+        <div class="field" id="field-due_date"><label>Brief Due Date <span class="req">*</span></label><input type="date" name="due_date" required><div class="field-error">Please select a due date.</div></div>
+      </div>
+      <div class="grid-3">
+        <div class="field"><label>First Asset Live Date</label><input type="date" name="live_date_1"><p class="hint">e.g. First Instagram post</p></div>
+        <div class="field"><label>Second Asset Live Date</label><input type="date" name="live_date_2"><p class="hint">e.g. TikTok videos go live</p></div>
+        <div class="field"><label>Campaign End Date</label><input type="date" name="end_date"></div>
+        <div class="field full"><label>Timeline Notes</label><textarea name="timeline_notes" placeholder="Key milestones, approval rounds, or blackout periods" rows="2"></textarea></div>
+      </div>
+    </div>
+
+    <!-- 08 -->
+    <div class="section">
+      <div class="section-title"><span class="section-num">08</span> References & Attachments</div>
+      <div class="grid-2">
+        <div class="field"><label>Competitor / Reference Links</label><textarea name="references" placeholder="URLs of campaigns you love or want to avoid" rows="3"></textarea></div>
+        <div class="field"><label>Additional Notes for Creative Team</label><textarea name="notes" placeholder="Anything else the team should know..." rows="3"></textarea></div>
+        <div class="field full">
+          <label>Attach Reference Files</label>
+          <div class="file-drop" id="fileDrop">
+            <input type="file" id="fileInput" multiple accept=".pdf,.pptx,.ppt,.jpg,.jpeg,.png,.gif,.webp,.key">
+            <div class="file-icon">📎</div>
+            <div class="file-drop-text"><strong>Click to browse</strong> or drag & drop<br><span style="font-size:11px">PDF, PPTX, JPEG, PNG, GIF, WebP — max 10MB per file</span></div>
+          </div>
+          <div class="file-list" id="fileList"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="submit-zone">
+      <button type="submit" class="btn-submit" id="submitBtn">
+        <span class="btn-progress" id="btnProgress"></span>
+        <span id="btnLabel">Submit Brief →</span>
+      </button>
+      <p class="submit-note" id="submitNote">Sends directly to the Sunbeam creative team — no email client needed.</p>
+    </div>
+
+  </form>
+</div>
+
+<div class="toast" id="toast">
+  <div class="toast-icon" id="toastIcon"></div>
+  <div><div class="toast-title" id="toastTitle"></div><div class="toast-msg" id="toastMsg"></div></div>
+</div>
+
+<script>
+// ============================================================
+// EMAILJS CONFIG — Replace these 3 values with yours
+// Get them free at https://www.emailjs.com
+// ============================================================
+const EMAILJS_PUBLIC_KEY = '70U_Ss2-LypzwgU9B';
+const EMAILJS_SERVICE_ID = 'service_06hp85v';
+const EMAILJS_TEMPLATE_ID = 'template_g8oo355';
+// ============================================================
+
+// Show setup banner if keys not replaced
+if (EMAILJS_PUBLIC_KEY === 'YOUR_EMAILJS_PUBLIC_KEY') {
+  document.getElementById('setupBanner').classList.add('show');
+}
+
+// Init EmailJS
+emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+
+// ── File handling ──────────────────────────────────────────
+const MAX_FILE_SIZE = 10 * 1024 * 1024;
+let attachedFiles = [];
+const fileDrop = document.getElementById('fileDrop');
+const fileInput = document.getElementById('fileInput');
+const fileList  = document.getElementById('fileList');
+
+fileDrop.addEventListener('dragover', e => { e.preventDefault(); fileDrop.classList.add('drag-over'); });
+fileDrop.addEventListener('dragleave', () => fileDrop.classList.remove('drag-over'));
+fileDrop.addEventListener('drop', e => { e.preventDefault(); fileDrop.classList.remove('drag-over'); handleFiles(Array.from(e.dataTransfer.files)); });
+fileInput.addEventListener('change', () => { handleFiles(Array.from(fileInput.files)); fileInput.value = ''; });
+
+function handleFiles(files) {
+  files.forEach(f => {
+    if (f.size > MAX_FILE_SIZE) { showToast('error','File too large',`"${f.name}" exceeds 10MB.`); return; }
+    if (attachedFiles.find(x => x.name === f.name && x.size === f.size)) return;
+    attachedFiles.push(f);
+  });
+  renderFileList();
+}
+function renderFileList() {
+  fileList.innerHTML = '';
+  attachedFiles.forEach((f, i) => {
+    const size = f.size > 1024*1024 ? (f.size/1024/1024).toFixed(1)+'MB' : (f.size/1024).toFixed(0)+'KB';
+    const tag = document.createElement('div');
+    tag.className = 'file-tag';
+    tag.innerHTML = `<div><span class="file-tag-name">📄 ${escHtml(f.name)}</span><span class="file-tag-size">${size}</span></div><button class="file-remove" type="button" onclick="removeFile(${i})">✕</button>`;
+    fileList.appendChild(tag);
+  });
+}
+function removeFile(i) { attachedFiles.splice(i,1); renderFileList(); }
+
+// ── Helpers ────────────────────────────────────────────────
+function escHtml(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function getChecked(name) { return Array.from(document.querySelectorAll(`[name="${name}"]:checked`)).map(e=>e.value).join(', ')||'—'; }
+function val(name) { const el=document.querySelector(`[name="${name}"]`); return el&&el.value.trim()?el.value.trim():'—'; }
+
+// ── Validation ─────────────────────────────────────────────
+function validateField(id, input) {
+  const w = document.getElementById('field-'+id);
+  if (!w) return true;
+  const ok = input.checkValidity() && input.value.trim() !== '';
+  w.classList.toggle('has-error', !ok);
+  return ok;
+}
+function validateAll() {
+  const fields = ['company','project','contact_name','contact_email','background','objective','audience_primary','main_message','due_date'];
+  let ok = true;
+  fields.forEach(id => { if (!validateField(id, document.querySelector(`[name="${id}"]`))) ok=false; });
+  const tone = document.querySelector('[name="tone"]');
+  const toneOk = tone.value.trim()!=='';
+  document.getElementById('field-tone').classList.toggle('has-error',!toneOk);
+  if (!toneOk) ok=false;
+  return ok;
+}
+
+// ── Submit ─────────────────────────────────────────────────
+document.getElementById('briefForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  if (!validateAll()) {
+    showToast('error','Required fields missing','Please fill in all highlighted fields.');
+    document.querySelector('.has-error')?.scrollIntoView({behavior:'smooth',block:'center'});
+    return;
+  }
+
+  // Check keys configured
+  if (EMAILJS_PUBLIC_KEY === 'YOUR_EMAILJS_PUBLIC_KEY') {
+    showToast('error','EmailJS not configured','Replace the 3 EmailJS keys in the script before deploying.');
+    return;
+  }
+
+  setLoading(true);
+
+  const fileNames = attachedFiles.length ? attachedFiles.map(f=>f.name).join(', ') : 'None';
+
+  // Template params — must match your EmailJS template variables
+  const params = {
+    to_email:            'Chutikan.wo@PLANBMEDIA.CO.TH',
+    reply_to:            val('contact_email'),
+    subject:             `[Creative Brief] ${val('project')} — ${val('company')} | Due: ${val('due_date')}`,
+    company:             val('company'),
+    project:             val('project'),
+    contact_name:        val('contact_name'),
+    contact_email:       val('contact_email'),
+    background:          val('background'),
+    objective:           val('objective'),
+    campaign_type:       getChecked('campaign_type'),
+    audience_primary:    val('audience_primary'),
+    audience_secondary:  val('audience_secondary'),
+    consumer_insight:    val('consumer_insight'),
+    consumer_enemy:      val('consumer_enemy'),
+    consumer_action:     val('consumer_action'),
+    main_message:        val('main_message'),
+    support_points:      val('support_points'),
+    brand_idea:          val('brand_idea'),
+    tone:                val('tone'),
+    brand_assets:        val('brand_assets'),
+    mandatories:         val('mandatories'),
+    platforms:           getChecked('platforms'),
+    deliverables:        val('deliverables'),
+    budget:              val('budget'),
+    budget_breakdown:    val('budget_breakdown'),
+    budget_flex:         val('budget_flex'),
+    stakeholder_ceo:     val('stakeholder_ceo'),
+    stakeholder_contact: val('stakeholder_contact'),
+    stakeholder_internal:val('stakeholder_internal'),
+    due_date:            val('due_date'),
+    live_date_1:         val('live_date_1'),
+    live_date_2:         val('live_date_2'),
+    end_date:            val('end_date'),
+    timeline_notes:      val('timeline_notes'),
+    references:          val('references'),
+    notes:               val('notes'),
+    attached_files:      fileNames
+  };
+
+  try {
+    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params);
+    setLoading(false);
+    showToast('success','Brief sent! ✓',
+      attachedFiles.length
+        ? `Received by the team. Note: please email attached files separately (${attachedFiles.length} file(s)).`
+        : 'The Sunbeam creative team has been notified.');
+    document.getElementById('briefForm').reset();
+    attachedFiles = [];
+    renderFileList();
+  } catch (err) {
+    setLoading(false);
+    console.error('EmailJS error:', err);
+    showToast('error','Send failed',`Error: ${err?.text || err?.message || 'Unknown error'}. Please try again or contact the team directly.`);
+  }
+});
+
+function setLoading(on) {
+  const btn = document.getElementById('submitBtn');
+  const lbl = document.getElementById('btnLabel');
+  const bar = document.getElementById('btnProgress');
+  btn.disabled = on;
+  if (on) {
+    lbl.innerHTML = '<span class="spinner"></span>Sending...';
+    bar.style.width = '75%';
+  } else {
+    lbl.textContent = 'Submit Brief →';
+    bar.style.width = '0';
+  }
+}
+
+// ── Toast ──────────────────────────────────────────────────
+let toastTimer;
+function showToast(type, title, msg) {
+  const t = document.getElementById('toast');
+  document.getElementById('toastIcon').textContent = type==='success'?'✅':'⚠️';
+  document.getElementById('toastTitle').textContent = title;
+  document.getElementById('toastMsg').textContent = msg;
+  t.className = `toast ${type} show`;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>t.classList.remove('show'), 7000);
+}
+
+// Live validation
+document.querySelectorAll('input[required],textarea[required]').forEach(el => {
+  el.addEventListener('blur', () => validateField(el.getAttribute('name'), el));
+});
+</script>
+</body>
+</html>
