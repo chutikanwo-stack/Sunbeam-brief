@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="th">
 <head>
@@ -80,8 +81,6 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:999;op
 .conn-pill{height:26px;padding:0 10px;background:var(--c04);border:1px solid var(--c08);
   border-radius:var(--r-p);font-size:10px;font-weight:600;color:var(--c40);
   display:flex;align-items:center;gap:5px}
-.conn-dot{width:6px;height:6px;border-radius:50%;background:#22c55e;flex-shrink:0;transition:background .3s}
-.conn-dot.off{background:var(--mg)}
 
 /* ── Main layout ──────────────────────────────────────────── */
 .main{padding-top:58px;min-height:100vh}
@@ -160,39 +159,55 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:999;op
 .sub-btn.loading{opacity:.65;pointer-events:none}
 
 /* ── Schedule view ────────────────────────────────────────── */
-.v-sched{max-width:1200px;margin:0 auto;padding:32px 18px 90px}
+.v-sched{max-width:1400px;margin:0 auto;padding:32px 18px 90px}
 .sched-bar{display:flex;align-items:center;justify-content:space-between;
-  margin-bottom:18px;gap:10px;flex-wrap:wrap}
+  margin-bottom:14px;gap:10px;flex-wrap:wrap}
 .wknav{display:flex;align-items:center;gap:9px}
 .wkbtn{width:32px;height:32px;border:1px solid var(--c08);background:var(--d2);
   border-radius:var(--r-sm);cursor:pointer;color:var(--c40);font-size:14px;
   display:flex;align-items:center;justify-content:center;transition:var(--t1)}
 .wkbtn:hover{border-color:var(--mg);color:var(--mg)}
-.wklbl{font-size:13px;font-weight:700;letter-spacing:-.2px}
+.wklbl{font-size:15px;font-weight:800;letter-spacing:-.3px}
 .fchips{display:flex;gap:4px;flex-wrap:wrap}
-.fchip{height:28px;padding:0 10px;border-radius:var(--r-p);border:1px solid var(--c08);
+.fchip{height:26px;padding:0 9px;border-radius:var(--r-p);border:1px solid var(--c08);
   background:transparent;color:var(--c40);font-family:'Montserrat',sans-serif;
   font-size:9px;font-weight:600;cursor:pointer;transition:var(--t1)}
 .fchip:hover,.fchip.active{border-color:var(--mg);color:var(--mg)}
-.wkgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:7px}
-.dcol{display:flex;flex-direction:column}
-.dhead{background:var(--d2);border:1px solid var(--c08);border-radius:var(--r-md) var(--r-md) 0 0;
-  padding:9px;text-align:center}
-.dname{font-size:8px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:var(--c15);margin-bottom:2px}
-.dnum{font-size:18px;font-weight:800;letter-spacing:-.5px}
-.dhead.today{border-color:var(--mg)}
+/* ── Monthly grid ── */
+.mnth-dayhdr{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-bottom:3px}
+.mnth-dayhdr-cell{text-align:center;font-size:8px;font-weight:700;letter-spacing:.8px;
+  text-transform:uppercase;color:var(--c15);padding:4px 0}
+.mnth-dayhdr-cell:first-child{color:rgba(251,146,60,.5)}
+.mnth-dayhdr-cell:last-child{color:rgba(251,146,60,.5)}
+.wkgrid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}
+.dcol{display:flex;flex-direction:column;min-height:110px}
+.dcol.out-month .dhead{opacity:.3}
+.dcol.out-month .dbody{opacity:.2}
+.dhead{background:var(--d2);border:1px solid var(--c08);border-radius:var(--r-sm) var(--r-sm) 0 0;
+  padding:5px 7px;display:flex;align-items:baseline;gap:5px}
+.dnum{font-size:14px;font-weight:800;letter-spacing:-.4px}
+.dname{font-size:8px;font-weight:600;color:var(--c15)}
+.dhead.today{border-color:var(--mg);background:var(--mg-s)}
 .dhead.today .dnum{color:var(--mg)}
+.dhead.weekend .dnum{color:rgba(251,146,60,.7)}
 .dbody{background:var(--d2);border:1px solid var(--c08);border-top:none;
-  border-radius:0 0 var(--r-md) var(--r-md);padding:5px;min-height:150px;
-  display:flex;flex-direction:column;gap:3px;flex:1}
+  border-radius:0 0 var(--r-sm) var(--r-sm);padding:3px;
+  display:flex;flex-direction:column;gap:2px;flex:1}
 .evcard{border-left:2px solid var(--mg);background:var(--d3);border-radius:0 var(--r-sm) var(--r-sm) 0;
-  padding:6px 8px;cursor:default;transition:transform .12s,background .12s}
-.evcard:hover{background:var(--d4);transform:translateX(2px)}
-.evt{font-size:8px;font-weight:600;color:var(--c40);margin-bottom:2px}
-.evtitle{font-size:9px;font-weight:600;color:var(--cloud);line-height:1.35;margin-bottom:3px}
+  padding:3px 5px;cursor:default;transition:transform .12s,background .12s}
+.evcard:hover{background:var(--d4);transform:translateX(1px)}
+.evt{font-size:7px;font-weight:600;color:var(--c40);margin-bottom:1px}
+.evtitle{font-size:8px;font-weight:600;color:var(--cloud);line-height:1.3;margin-bottom:2px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.evnote{font-size:7px;color:var(--c40);line-height:1.3;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .evtags{display:flex;gap:2px;flex-wrap:wrap}
-.evtag{height:13px;padding:0 4px;border-radius:var(--r-p);font-size:7px;font-weight:700;color:#fff;line-height:13px}
-.dempty{height:44px;display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--c08)}
+.evtag{height:12px;padding:0 3px;border-radius:var(--r-p);font-size:7px;font-weight:700;color:#fff;line-height:12px}
+.dempty{height:24px}
+/* ── Leave bars ── */
+.leave-bar{border-radius:var(--r-sm);padding:2px 5px;font-size:7px;font-weight:700;
+  line-height:1.4;display:flex;align-items:center;gap:3px}
+.leave-bar.vacation{background:rgba(34,197,94,.15);color:#4ade80;border-left:2px solid #22c55e}
+.leave-bar.sick{background:rgba(251,146,60,.15);color:#fb923c;border-left:2px solid #fb923c}
 
 /* ── Tomorrow view ────────────────────────────────────────── */
 .v-tmr{max-width:700px;margin:0 auto;padding:32px 18px 90px}
@@ -295,11 +310,6 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:999;op
       </svg>งานพรุ่งนี้
     </button>
   </div>
-  <div class="nav-right">
-    <div class="conn-pill">
-      <span class="conn-dot off" id="conn-dot"></span>
-      <span id="conn-txt">ไม่ได้เชื่อมต่อ</span>
-    </div>
   </div>
 </nav>
 
@@ -347,6 +357,13 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:999;op
       <div class="fc-lbl">📝 รายละเอียดงาน</div>
       <input type="text" class="fi fi-xl" id="t-title" placeholder="ชื่องาน / ประชุม / โปรเจกต์…" required>
       <textarea class="fta" id="t-notes" placeholder="หมายเหตุ เช่น link, venue, brief…"></textarea>
+      <div class="allday-row" style="margin-top:10px">
+        <label class="tsw">
+          <input type="checkbox" id="create-meet">
+          <span class="ttrack" style="--sw-on:#22c55e"></span>
+        </label>
+        <span class="tlbl">🎥 สร้าง Google Meet อัตโนมัติ</span>
+      </div>
     </div>
 
     <!-- TYPE -->
@@ -375,12 +392,21 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:999;op
   <div class="pg-head"><h1 class="pg-title">ตารางงาน</h1></div>
   <div class="sched-bar">
     <div class="wknav">
-      <button class="wkbtn" onclick="shiftWeek(-1)">←</button>
+      <button class="wkbtn" onclick="shiftMonth(-1)">←</button>
       <span class="wklbl" id="wk-lbl">—</span>
-      <button class="wkbtn" onclick="shiftWeek(1)">→</button>
-      <button class="qbtn" onclick="resetWeek()" style="margin-left:4px">สัปดาห์นี้</button>
+      <button class="wkbtn" onclick="shiftMonth(1)">→</button>
+      <button class="qbtn" onclick="resetMonth()" style="margin-left:4px">เดือนนี้</button>
     </div>
     <div class="fchips" id="fchips"></div>
+  </div>
+  <div class="mnth-dayhdr">
+    <div class="mnth-dayhdr-cell">อา</div>
+    <div class="mnth-dayhdr-cell">จ</div>
+    <div class="mnth-dayhdr-cell">อ</div>
+    <div class="mnth-dayhdr-cell">พ</div>
+    <div class="mnth-dayhdr-cell">พฤ</div>
+    <div class="mnth-dayhdr-cell">ศ</div>
+    <div class="mnth-dayhdr-cell">ส</div>
   </div>
   <div class="wkgrid" id="wkgrid"></div>
 </div>
@@ -419,32 +445,32 @@ const N8N_URL = 'https://pb-n8n.planbmedia.co.th/webhook/sunbeam-schedule';
 
 // STAFF (26 คน)
 const STAFF = [
-  {name:'Ping',  team:'Group Creative Director',color:'#C8A87A'},
-  {name:'Snk',   team:'Creative 1',             color:'#5B7FE8'},
-  {name:'Tang',  team:'Creative 1',             color:'#5B7FE8'},
-  {name:'Pre',   team:'Creative 1',             color:'#5B7FE8'},
-  {name:'God',   team:'Creative 2',             color:'#38BDF8'},
-  {name:'Fah',   team:'Creative 2',             color:'#38BDF8'},
-  {name:'NP',    team:'Creative 2',             color:'#38BDF8'},
-  {name:'Note',  team:'Creative 3',             color:'#FACC15'},
-  {name:'Prew',  team:'Creative 3',             color:'#FACC15'},
-  {name:'Pueng', team:'Creative Support',       color:'#4ADE80'},
-  {name:'Non',   team:'Creative Support',       color:'#4ADE80'},
-  {name:'PP',    team:'Client Service',         color:'#F472B6'},
-  {name:'Mai',   team:'Client Service',         color:'#F472B6'},
-  {name:'CP',    team:'Client Service',         color:'#F472B6'},
-  {name:'KT',    team:'Client Service',         color:'#F472B6'},
-  {name:'Oof',   team:'Project Management',     color:'#FB923C'},
-  {name:'Fei',   team:'Project Management',     color:'#FB923C'},
-  {name:'Beam',  team:'Project Management',     color:'#FB923C'},
-  {name:'Suang', team:'3D',                     color:'#34D399'},
-  {name:'Pran',  team:'3D',                     color:'#34D399'},
-  {name:'Fiw',   team:'3D',                     color:'#34D399'},
-  {name:'Wut',   team:'3D',                     color:'#34D399'},
-  {name:'Becks', team:'3D',                     color:'#34D399'},
-  {name:'Pond',  team:'3D',                     color:'#34D399'},
-  {name:"P'Mu",  team:'Retouch',                color:'#A78BFA'},
-  {name:'Pim',   team:'Strategy',               color:'#FB923C'},
+  {name:'Ping',  team:'Group Creative Director',color:'#C8A87A', email:'thamonwan.ro@planbmedia.co.th'},
+  {name:'Snk',   team:'Creative 1',             color:'#5B7FE8', email:'theerachart.ru@planbmedia.co.th'},
+  {name:'Tang',  team:'Creative 1',             color:'#5B7FE8', email:'sanhakorn.th@planbmedia.co.th'},
+  {name:'Pre',   team:'Creative 1',             color:'#5B7FE8', email:'parintr.ko@planbmedia.co.th'},
+  {name:'God',   team:'Creative 2',             color:'#38BDF8', email:'piyawat.wa@planbmedia.co.th'},
+  {name:'Fah',   team:'Creative 2',             color:'#38BDF8', email:'jiratchaya.kl@planbmedia.co.th'},
+  {name:'NP',    team:'Creative 2',             color:'#38BDF8', email:'thanit.ph@planbmedia.co.th'},
+  {name:'Note',  team:'Creative 3',             color:'#FACC15', email:'prapatpong.ti@planbmedia.co.th'},
+  {name:'Prew',  team:'Creative 3',             color:'#FACC15', email:'sirin.ja@planbmedia.co.th'},
+  {name:'Pueng', team:'Creative Support',       color:'#4ADE80', email:'kullanan.wo@planbmedia.co.th'},
+  {name:'Non',   team:'Creative Support',       color:'#4ADE80', email:'piyanon.ro@planbmedia.co.th'},
+  {name:'PP',    team:'Client Service',         color:'#F472B6', email:'chawanvit.bo@planbmedia.co.th'},
+  {name:'Mai',   team:'Client Service',         color:'#F472B6', email:'sutthicha.sa@planbmedia.co.th'},
+  {name:'CP',    team:'Client Service',         color:'#F472B6', email:'pavida.ho@planbmedia.co.th'},
+  {name:'KT',    team:'Client Service',         color:'#F472B6', email:'putida.so@planbmedia.co.th'},
+  {name:'Oof',   team:'Project Management',     color:'#FB923C', email:'atitan.ta@planbmedia.co.th'},
+  {name:'Fei',   team:'Project Management',     color:'#FB923C', email:'chawit.pi@planbmedia.co.th'},
+  {name:'Beam',  team:'Project Management',     color:'#FB923C', email:'sararut.sa@planbmedia.co.th'},
+  {name:'Suang', team:'3D',                     color:'#34D399', email:'chutikan.wo@planbmedia.co.th'},
+  {name:'Pran',  team:'3D',                     color:'#34D399', email:'pran.pi@planbmedia.co.th'},
+  {name:'Fiw',   team:'3D',                     color:'#34D399', email:'watcharin.po@planbmedia.co.th'},
+  {name:'Wut',   team:'3D',                     color:'#34D399', email:'tirawut.ja@planbmedia.co.th'},
+  {name:'Becks', team:'3D',                     color:'#34D399', email:'siraphop.ph@planbmedia.co.th'},
+  {name:'Pond',  team:'3D',                     color:'#34D399', email:'jiratiwan.ch@planbmedia.co.th'},
+  {name:"P'Mu",  team:'Retouch',                color:'#A78BFA', email:'wichet.as@planbmedia.co.th'},
+  {name:'Pim',   team:'Strategy',               color:'#FB923C', email:'pimpaka.pi@planbmedia.co.th'},
 ];
 
 const TYPES = [
@@ -455,9 +481,11 @@ const TYPES = [
   {id:'deliver', label:'ส่งงาน',        em:'📤'},
   {id:'edit',    label:'แก้ไขงาน',      em:'✏️'},
   {id:'brief',   label:'รับ Brief',      em:'📋'},
-  {id:'3d',      label:'3D / Render',   em:'🧊'},
-  {id:'motion',  label:'Motion',        em:'🎬'},
-  {id:'other',   label:'อื่นๆ',          em:'📌'},
+  {id:'3d',              label:'3D / Render',  em:'🧊'},
+  {id:'motion',          label:'Motion',       em:'🎬'},
+  {id:'other',           label:'อื่นๆ',         em:'📌'},
+  {id:'leave-vacation',  label:'ลาพักร้อน',    em:'🏖️'},
+  {id:'leave-sick',      label:'ลาป่วย',       em:'🤒'},
 ];
 
 const TH_M = ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
@@ -467,14 +495,14 @@ const TH_S = ['อา','จ','อ','พ','พฤ','ศ','ส'];
 // STATE
 let selMembers = new Set();
 let selType    = '';
-let wkOffset   = 0;
+let moOffset   = 0;
 let schedData  = [];
 let tmrData    = [];
 let filterTeam = 'all';
 
 // ── INIT ────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
-  setDate(0); buildTypes(); buildMembers(); buildFilters(); setTmrHeader(); checkConn();
+  setDate(0); buildTypes(); buildMembers(); buildFilters(); setTmrHeader();
   gsap.from('.pg-head', {y:14,opacity:0,duration:.5,ease:'power3.out'});
   gsap.from('.fc',      {y:14,opacity:0,duration:.5,stagger:.07,ease:'power3.out',delay:.08});
 });
@@ -485,7 +513,7 @@ function goView(v) {
   document.querySelectorAll('.nav-tab').forEach(e=>e.classList.remove('active'));
   document.getElementById('view-'+v).classList.add('active');
   document.getElementById('tab-'+v).classList.add('active');
-  if (v==='schedule') { renderWeek(); loadSchedule(); }
+  if (v==='schedule') { renderMonth(); loadSchedule(); }
   if (v==='tomorrow') { setTmrHeader(); loadTmr(); }
 }
 
@@ -520,15 +548,19 @@ function buildMembers() {
   document.getElementById('teams-wrap').innerHTML = teams.map(team=>{
     const ms = STAFF.filter(s=>s.team===team);
     return `<div><div class="team-lbl">${team}</div>
-      <div class="mchips">${ms.map(m=>`
-        <button type="button" class="mchip" id="mc-${m.name}"
-          onclick="togMem('${m.name}','${m.color}')">
+      <div class="mchips">${ms.map(m=>{
+        const safeId = m.name.replace(/[^a-zA-Z0-9]/g,'_');
+        return `<button type="button" class="mchip" id="mc-${safeId}"
+          data-name="${m.name.replace(/"/g,'&quot;')}" data-color="${m.color}"
+          onclick="togMem(this)">
           <span class="mav" style="background:${m.color}">${m.name[0]}</span>${m.name}
-        </button>`).join('')}</div></div>`;
+        </button>`;
+      }).join('')}</div></div>`;
   }).join('');
 }
-function togMem(name, color) {
-  const btn = document.getElementById('mc-'+name);
+function togMem(btn) {
+  const name  = btn.dataset.name;
+  const color = btn.dataset.color;
   if (selMembers.has(name)) {
     selMembers.delete(name); btn.classList.remove('sel');
     btn.style.borderColor=''; btn.style.background='';
@@ -547,6 +579,10 @@ async function handleSubmit(e) {
   if (!selMembers.size) { toast('กรุณาเลือกผู้เกี่ยวข้องอย่างน้อย 1 คน','err'); return; }
 
   // ── Payload — field names ตรงกับ Google Sheet headers ──
+  const createMeet = document.getElementById('create-meet').checked;
+  const attendeeEmails = createMeet
+    ? [...selMembers].map(n => STAFF.find(s=>s.name===n)?.email).filter(Boolean)
+    : [];
   const payload = {
     action: 'addTask',
     data: {
@@ -558,6 +594,8 @@ async function handleSubmit(e) {
       type:      selType || 'other',
       notes:     document.getElementById('t-notes').value.trim(),
       isAllDay:  document.getElementById('allday').checked,
+      createMeet,
+      attendeeEmails,
     }
   };
 
@@ -602,58 +640,99 @@ function buildFilters() {
 function setFilter(team, el) {
   filterTeam=team;
   document.querySelectorAll('.fchip').forEach(b=>b.classList.remove('active'));
-  el.classList.add('active'); renderWeek();
+  el.classList.add('active'); renderMonth();
 }
-function shiftWeek(n){ wkOffset+=n; renderWeek(); loadSchedule(); }
-function resetWeek()  { wkOffset=0;  renderWeek(); loadSchedule(); }
+function shiftMonth(n){ moOffset+=n; renderMonth(); loadSchedule(); }
+function resetMonth()  { moOffset=0;  renderMonth(); loadSchedule(); }
 
-function weekDates() {
-  const t=new Date(), mo=new Date(t);
-  mo.setDate(t.getDate()-((t.getDay()+6)%7)+wkOffset*7);
-  return Array.from({length:5},(_,i)=>{ const d=new Date(mo); d.setDate(mo.getDate()+i); return d; });
+function currentMonthDates() {
+  const now=new Date();
+  const base=new Date(now.getFullYear(), now.getMonth()+moOffset, 1);
+  return base;
 }
-function renderWeek() {
-  const days=weekDates(), todayS=ymd(new Date());
-  const dNames=['จันทร์','อังคาร','พุธ','พฤหัสบดี','ศุกร์'];
-  const s=days[0],e=days[4];
+function renderMonth() {
+  const base=currentMonthDates();
+  const y=base.getFullYear(), m=base.getMonth();
+  const todayS=ymd(new Date());
   document.getElementById('wk-lbl').textContent=
-    `${s.getDate()} — ${e.getDate()} ${TH_M[e.getMonth()]} ${e.getFullYear()+543}`;
+    `${TH_M[m]} ${y+543}`;
 
-  document.getElementById('wkgrid').innerHTML = days.map((d,i)=>{
-    const ds=ymd(d), today=ds===todayS;
+  // First day of month weekday (0=Sun)
+  const firstDow = new Date(y,m,1).getDay();
+  const daysInMonth = new Date(y,m+1,0).getDate();
+  const daysInPrev  = new Date(y,m,0).getDate();
+  const totalCells  = Math.ceil((firstDow+daysInMonth)/7)*7;
+
+  const cells = [];
+  for(let i=0;i<totalCells;i++){
+    let date, inMonth=true;
+    if(i<firstDow){ date=new Date(y,m-1,daysInPrev-firstDow+1+i); inMonth=false; }
+    else if(i>=firstDow+daysInMonth){ date=new Date(y,m+1,i-firstDow-daysInMonth+1); inMonth=false; }
+    else { date=new Date(y,m,i-firstDow+1); }
+    cells.push({date,inMonth});
+  }
+
+  document.getElementById('wkgrid').innerHTML = cells.map(({date,inMonth})=>{
+    const ds=ymd(date), today=ds===todayS;
+    const dow=date.getDay(); // 0=Sun,6=Sat
+    const weekend=dow===0||dow===6;
+
     let evs=schedData.filter(ev=>ev.date===ds);
-    if (filterTeam!=='all') {
+    if(filterTeam!=='all'){
       const tm=STAFF.filter(s=>s.team===filterTeam).map(s=>s.name);
-      evs=evs.filter(ev=>Array.isArray(ev.members)
-        ? ev.members.some(m=>tm.includes(m))
-        : String(ev.members||'').split(',').map(x=>x.trim()).some(m=>tm.includes(m)));
+      evs=evs.filter(ev=>{
+        const ms=Array.isArray(ev.members)?ev.members:String(ev.members||'').split(',').map(x=>x.trim());
+        return ms.some(m=>tm.includes(m));
+      });
     }
     evs.sort((a,b)=>{
-      if(a.isAllDay&&!b.isAllDay)return 1;if(!a.isAllDay&&b.isAllDay)return -1;
+      const aLeave=String(a.type||'').startsWith('leave');
+      const bLeave=String(b.type||'').startsWith('leave');
+      if(aLeave&&!bLeave)return -1; if(!aLeave&&bLeave)return 1;
+      if(a.isAllDay&&!b.isAllDay)return 1; if(!a.isAllDay&&b.isAllDay)return -1;
       return (a.startTime||'').localeCompare(b.startTime||'');
     });
-    const html=evs.length ? evs.map(ev=>{
+
+    const html = evs.length ? evs.map(ev=>{
       const ms=Array.isArray(ev.members)?ev.members:String(ev.members||'').split(',').map(x=>x.trim()).filter(Boolean);
+      const tp=String(ev.type||'');
+
+      // Leave bar rendering
+      if(tp==='leave-vacation'||tp==='leave-sick'){
+        const cls=tp==='leave-vacation'?'vacation':'sick';
+        const ico=tp==='leave-vacation'?'🏖️':'🤒';
+        return `<div class="leave-bar ${cls}">${ico} ${ms.join(', ')}</div>`;
+      }
+
+      // Normal task card
       const c=mColor(ms[0]);
-      const tags=ms.slice(0,3).map(m=>{const c2=mColor(m);return `<span class="evtag" style="background:${c2}30;color:${c2}">${m}</span>`;}).join('')
-        +(ms.length>3?`<span class="evtag" style="background:var(--c08);color:var(--c40)">+${ms.length-3}</span>`:'');
+      const tags=ms.slice(0,2).map(m=>{const c2=mColor(m);return `<span class="evtag" style="background:${c2}30;color:${c2}">${m}</span>`;}).join('')
+        +(ms.length>2?`<span class="evtag" style="background:var(--c08);color:var(--c40)">+${ms.length-2}</span>`:'');
       return `<div class="evcard" style="border-left-color:${c}">
         <div class="evt">${ev.isAllDay?'ทั้งวัน':(ev.startTime||'')+(ev.endTime?' – '+ev.endTime:'')}</div>
         <div class="evtitle">${typeEmoji(ev.type)} ${ev.title}</div>
+        ${ev.notes?`<div class="evnote">📝 ${ev.notes}</div>`:''}
         <div class="evtags">${tags}</div></div>`;
-    }).join('') : '<div class="dempty">—</div>';
-    return `<div class="dcol"><div class="dhead${today?' today':''}">
-      <div class="dname">${dNames[i]}</div><div class="dnum">${d.getDate()}</div></div>
+    }).join('') : '<div class="dempty"></div>';
+
+    const headCls=[today?'today':'',weekend?'weekend':''].filter(Boolean).join(' ');
+    return `<div class="dcol${inMonth?'':' out-month'}">
+      <div class="dhead${headCls?' '+headCls:''}">
+        <span class="dnum">${date.getDate()}</span>
+      </div>
       <div class="dbody">${html}</div></div>`;
   }).join('');
 }
 async function loadSchedule() {
-  const d=weekDates();
+  const base=currentMonthDates();
+  const y=base.getFullYear(), m=base.getMonth();
+  const start=ymd(new Date(y,m,1));
+  const end=ymd(new Date(y,m+1,0));
   try {
     const res=await fetch(N8N_URL,{method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({action:'getSchedule',startDate:ymd(d[0]),endDate:ymd(d[4])})});
+      body:JSON.stringify({action:'getSchedule',startDate:start,endDate:end})});
     const j=await res.json();
-    if(j.events){schedData=j.events;renderWeek();}
+    if(j.events){schedData=j.events;renderMonth();}
   } catch(e){console.warn(e);}
 }
 
@@ -666,6 +745,10 @@ function setTmrHeader() {
 }
 async function loadTmr() {
   const c=document.getElementById('tmr-content');
+  if(!N8N_URL){
+    c.innerHTML='<div class="tmr-empty"><div class="tmr-empty-ico">⚙️</div><div class="tmr-empty-title">ยังไม่ตั้งค่า Webhook</div><div class="tmr-empty-desc">กด ⚙️ มุมขวาบน</div></div>';
+    return;
+  }
   c.innerHTML='<div class="tmr-empty"><div class="spin spin-lg" style="margin:0 auto"></div></div>';
   try {
     const res=await fetch(N8N_URL,{method:'POST',headers:{'Content-Type':'application/json'},
@@ -738,16 +821,6 @@ function copyTmr() {
   navigator.clipboard.writeText(txt).then(()=>toast('📋 คัดลอกแล้ว!','ok')).catch(()=>toast('คัดลอกไม่ได้','err'));
 }
 
-async function checkConn() {
-  const dot=document.getElementById('conn-dot'), txt=document.getElementById('conn-txt');
-  try {
-    dot.className='conn-dot off'; txt.textContent='กำลังเชื่อมต่อ…';
-    const r=await fetch(N8N_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'ping'})});
-    const j=await r.json();
-    if(j.ok){ dot.className='conn-dot'; txt.textContent='เชื่อมต่อแล้ว ✓'; }
-    else throw new Error();
-  } catch{ dot.className='conn-dot off'; txt.textContent='เชื่อมต่อไม่ได้'; }
-}
 
 // ── HELPERS ───────────────────────────────────────────────────
 function mColor(name){ return STAFF.find(s=>s.name===name)?.color||'#BB2649'; }
